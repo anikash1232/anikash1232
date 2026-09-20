@@ -36,8 +36,8 @@ primitives and polygon filling built on the same engine.
 
 **[c-string-vector-library](https://github.com/anikash1232/c-string-vector-library)** —
 Dynamic string and vector types in C with manual memory management.
-**[c-multithreaded-sort](https://github.com/anikash1232/c-multithreaded-sort)** — A
-pthreads sorting implementation built up in stages.
+**[c-line-sorter](https://github.com/anikash1232/c-line-sorter)** — A `sort`-style
+utility reading lines of unknown length into growing heap buffers.
 **[c-hex-and-parity-tools](https://github.com/anikash1232/c-hex-and-parity-tools)** —
 Bitwise and hex-conversion utilities.
 
