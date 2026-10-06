@@ -36,7 +36,7 @@
 
 <h3><code>ani@github ~ $ ./stack.sh</code></h3>
 
-<img src="./art/tech.svg" width="860" alt="Tech stack. Daily drivers: Python, TypeScript, React, FastAPI, AWS, PostgreSQL. Also Java, C++, JavaScript, SQL, Next.js, Angular, Node.js, Claude and OpenAI APIs, MCP, RAG, Azure, Docker, Git, Linux." />
+<img src="./art/tech.svg" width="860" alt="Tech stack. Daily drivers: Python, TypeScript, React, FastAPI, AWS, PostgreSQL. Languages: Python, TypeScript, JavaScript, Java, C++, C, C#, Go, R, Bash, SQL, HTML, CSS. Frameworks: React, Next.js, Angular, Node.js, Express, FastAPI. AI: Claude and OpenAI APIs, MCP, RAG. Data and ML: pandas, NumPy, Matplotlib, PyTorch, TensorFlow. Databases: PostgreSQL, MySQL, MongoDB, Supabase, Oracle. Cloud: AWS, Azure, IBM Cloud, Docker, Kubernetes, Tailscale. Tools: Git, GitHub, Linux, Selenium, Playwright, Railway, Vercel." />
 
 <br>
 <br>

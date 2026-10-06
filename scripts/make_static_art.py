@@ -130,12 +130,14 @@ def tech():
         x = pad
         for name in grp["items"]:
             ic = icons[name]
-            w = 12 + 20 + 10 + text_w(name, 12) + 14
+            plain = ic.get("plain")
+            w = (16 + text_w(name, 12) + 16) if plain else (12 + 20 + 10 + text_w(name, 12) + 14)
             if x + w > pad + inner:
                 x, y = pad, y + 46
-            g = (f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="38" rx="10" fill="{BG}" stroke="{FRAME}"/>'
-                 f'<g opacity=".88">{icon_markup(ic, x + 22, y + 19, 20)}</g>'
-                 f'<text x="{x + 42:.1f}" y="{y + 24}" font-size="12" fill="{SOFT}">{esc(name)}</text>')
+            body = (f'<text x="{x + 16:.1f}" y="{y + 24}" font-size="12" fill="{SOFT}">{esc(name)}</text>' if plain else
+                    f'<g opacity=".88">{icon_markup(ic, x + 22, y + 19, 20)}</g>'
+                    f'<text x="{x + 42:.1f}" y="{y + 24}" font-size="12" fill="{SOFT}">{esc(name)}</text>')
+            g = f'<rect x="{x:.1f}" y="{y}" width="{w:.1f}" height="38" rx="{19 if plain else 10}" fill="{BG}" stroke="{FRAME}"/>' + body
             s_parts.append(fade(g, 0.2 + k * 0.05, "p"))
             k += 1
             x += w + 10
