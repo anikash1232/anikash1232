@@ -59,7 +59,32 @@
 
 <h3><code>ani@github ~ $ ls ./more-repos</code></h3>
 
-<a href="https://github.com/anikash1232?tab=repositories"><img src="./art/more-repos.svg" width="860" alt="More repos: C++ rasterizer, C systems tools, Java design patterns, web projects. Click for all repositories." /></a>
+<table>
+<tr>
+<td><a href="https://github.com/anikash1232/2d-rasterizer-blending"><img src="./art/repo-01.svg" width="424" alt="2d-rasterizer-blending" /></a></td>
+<td><a href="https://github.com/anikash1232/2d-rasterizer-shapes"><img src="./art/repo-02.svg" width="424" alt="2d-rasterizer-shapes" /></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/anikash1232/c-string-vector-library"><img src="./art/repo-03.svg" width="424" alt="c-string-vector-library" /></a></td>
+<td><a href="https://github.com/anikash1232/c-line-sorter"><img src="./art/repo-04.svg" width="424" alt="c-line-sorter" /></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/anikash1232/c-hex-and-parity-tools"><img src="./art/repo-05.svg" width="424" alt="c-hex-and-parity-tools" /></a></td>
+<td><a href="https://github.com/anikash1232/dungeon-crawler"><img src="./art/repo-06.svg" width="424" alt="dungeon-crawler" /></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/anikash1232/adapter-pattern-library"><img src="./art/repo-07.svg" width="424" alt="adapter-pattern-library" /></a></td>
+<td><a href="https://github.com/anikash1232/robot-control-simulator"><img src="./art/repo-08.svg" width="424" alt="robot-control-simulator" /></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/anikash1232/hydration-calculator"><img src="./art/repo-09.svg" width="424" alt="hydration-calculator" /></a></td>
+<td><a href="https://github.com/anikash1232/pixel-art-maker"><img src="./art/repo-10.svg" width="424" alt="pixel-art-maker" /></a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/anikash1232/url-shortener-orm"><img src="./art/repo-11.svg" width="424" alt="url-shortener-orm" /></a></td>
+<td><a href="https://github.com/anikash1232?tab=repositories"><img src="./art/repo-all.svg" width="424" alt="All repositories" /></a></td>
+</tr>
+</table>
 
 <br>
 

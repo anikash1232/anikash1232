@@ -244,38 +244,37 @@ def contact():
 
 
 MORE = [
-    ("graphics (C++)", [("2d-rasterizer-blending", "Porter-Duff blend modes"),
-                        ("2d-rasterizer-shapes", "AA, clipping, primitives")]),
-    ("systems (C)", [("c-string-vector-library", "generic vectors + strings"),
-                     ("c-line-sorter", "unbounded line sorting"),
-                     ("c-hex-and-parity-tools", "hex codec + parity bits")]),
-    ("object-oriented design (Java)", [("dungeon-crawler", "procedural JavaFX game"),
-                                       ("adapter-pattern-library", "UNC campus directions"),
-                                       ("robot-control-simulator", "decorator-pattern robots")]),
-    ("web", [("hydration-calculator", "Next.js + shadcn/ui"),
-             ("pixel-art-maker", "canvas pixel editor"),
-             ("url-shortener-orm", "FastAPI + ORM + DI")]),
+    ("2d-rasterizer-blending", "C++", "Software rasterizer implementing full Porter-Duff compositing: all twelve blend modes over premultiplied pixels, templated so dispatch folds away at compile time."),
+    ("2d-rasterizer-shapes", "C++", "Canvas primitives, line clipping and coverage-based anti-aliasing."),
+    ("c-string-vector-library", "C", "Generic dynamic array and string types over malloc, with an allocation-guard layer."),
+    ("c-line-sorter", "C", "Lines of unknown length read into growing heap buffers."),
+    ("c-hex-and-parity-tools", "C", "Encoder/decoder pairs with bit-level parity checking."),
+    ("dungeon-crawler", "Java", "Procedurally generated JavaFX dungeon crawler, about 1,200 lines, with polymorphic collision resolution."),
+    ("adapter-pattern-library", "Java", "UNC campus walking directions, adapting a routing service to a buildings API."),
+    ("robot-control-simulator", "Java", "Decorator-pattern robot customization with a composed JavaFX visual."),
+    ("hydration-calculator", "Web", "Temperature-adjusted daily water intake, built with Next.js and shadcn/ui."),
+    ("pixel-art-maker", "Web", "Canvas editor with drawing logic fully separated from the DOM."),
+    ("url-shortener-orm", "Web", "FastAPI over an ORM, wired with dependency injection."),
 ]
 
 
 def more_repos():
-    pad, gap, rowh = 28, 24, 28
-    colw = (W - pad * 2 - gap) / 2
-    top1, top2 = 40, 40 + 22 + 3 * rowh + 26
-    h = top2 + 22 + 3 * rowh + 52
-    fr, _ = frame(W, h)
-    s = head(W, h) + fr
-    for i, (grp, items) in enumerate(MORE):
-        x = pad + (i % 2) * (colw + gap)
-        y = top1 if i < 2 else top2
-        g = f'<text x="{x}" y="{y}" font-size="12" fill="{MUTED}">{esc(grp)}</text>'
-        for j, (name, desc) in enumerate(items):
-            yy = y + 28 + j * rowh
-            g += (f'<text x="{x}" y="{yy}" font-size="13" font-weight="700" fill="{CYAN}">{esc(name)}</text>'
-                  f'<text x="{x + 204}" y="{yy}" font-size="12" fill="{SOFT}">{esc(desc)}</text>')
-        s += fade(g, 0.1 + i * 0.2)
-    s += fade(f'<text x="{W - pad}" y="{h - 22}" font-size="13" fill="{GOLD}" text-anchor="end">all repositories &#8594;</text>', 1.0)
-    write(out("more-repos.svg"), s + "</svg>")
+    w, h = 424, 162
+    for i, (name, lang, desc) in enumerate(MORE):
+        fr, _ = frame(w, h)
+        s = head(w, h) + fr
+        s += (f'<text x="24" y="42" font-size="15" font-weight="700" fill="{CYAN}">{esc(name)}</text>'
+              f'<text x="{w - 24}" y="42" font-size="12" fill="{MUTED}" text-anchor="end">{esc(lang)}</text>')
+        lines = wrap(desc, w - 48, 13)
+        assert len(lines) <= 4, f"{name}: description too long"
+        for j, ln in enumerate(lines):
+            s += f'<text x="24" y="{74 + j * 20}" font-size="13" fill="{SOFT}">{esc(ln)}</text>'
+        write(out(f"repo-{i + 1:02d}.svg"), s + "</svg>")
+    fr, _ = frame(w, h)
+    s = head(w, h) + fr
+    s += (f'<text x="{w / 2}" y="{h / 2 - 2}" font-size="16" font-weight="700" fill="{GOLD}" text-anchor="middle">all repositories &#8594;</text>'
+          f'<text x="{w / 2}" y="{h / 2 + 24}" font-size="12" fill="{MUTED}" text-anchor="middle">github.com/anikash1232</text>')
+    write(out("repo-all.svg"), s + "</svg>")
 
 
 if __name__ == "__main__":
