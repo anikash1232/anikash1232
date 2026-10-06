@@ -57,6 +57,13 @@
 <br>
 <br>
 
+<h3><code>ani@github ~ $ git log --career</code></h3>
+
+<img src="./art/career.svg" width="860" alt="Career: Co-Founder at Prysma Tech, Applied AI Researcher at UNC, Software Developer at Chiaro, Software Engineer Intern at Integrus, Teaching Assistant for COMP 210 and COMP 301" />
+
+<br>
+<br>
+
 <h3><code>ani@github ~ $ ls ./more-repos</code></h3>
 
 <table>
@@ -86,13 +93,6 @@
 </tr>
 </table>
 
-<br>
-
-<h3><code>ani@github ~ $ git log --career</code></h3>
-
-<img src="./art/career.svg" width="860" alt="Career: Co-Founder at Prysma Tech, Applied AI Researcher at UNC, Software Developer at Chiaro, Software Engineer Intern at Integrus, Teaching Assistant for COMP 210 and COMP 301" />
-
-<br>
 <br>
 
 <!-- latest public commits, rebuilt daily by .github/workflows/update-profile-art.yml -->
