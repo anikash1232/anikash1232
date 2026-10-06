@@ -1,1 +1,25 @@
-{"updated":null,"langs":[]}
+{
+ "updated": "2026-10-06T05:30:26+00:00",
+ "langs": [
+  {
+   "n": "C++",
+   "pct": 67
+  },
+  {
+   "n": "Java",
+   "pct": 10
+  },
+  {
+   "n": "Python",
+   "pct": 10
+  },
+  {
+   "n": "JavaScript",
+   "pct": 6
+  },
+  {
+   "n": "Other",
+   "pct": 7
+  }
+ ]
+}
