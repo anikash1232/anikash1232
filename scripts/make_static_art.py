@@ -243,13 +243,38 @@ def contact():
     write(out("contact.svg"), s + "</svg>")
 
 
+MORE = [
+    ("graphics (C++)", [("2d-rasterizer-blending", "Porter-Duff blend modes"),
+                        ("2d-rasterizer-shapes", "AA, clipping, primitives")]),
+    ("systems (C)", [("c-string-vector-library", "generic vectors + strings"),
+                     ("c-line-sorter", "unbounded line sorting"),
+                     ("c-hex-and-parity-tools", "hex codec + parity bits")]),
+    ("object-oriented design (Java)", [("dungeon-crawler", "procedural JavaFX game"),
+                                       ("adapter-pattern-library", "UNC campus directions"),
+                                       ("robot-control-simulator", "decorator-pattern robots")]),
+    ("web", [("hydration-calculator", "Next.js + shadcn/ui"),
+             ("pixel-art-maker", "canvas pixel editor"),
+             ("url-shortener-orm", "FastAPI + ORM + DI")]),
+]
+
+
 def more_repos():
-    h = 56
+    pad, gap, rowh = 28, 24, 28
+    colw = (W - pad * 2 - gap) / 2
+    top1, top2 = 40, 40 + 22 + 3 * rowh + 26
+    h = top2 + 22 + 3 * rowh + 52
     fr, _ = frame(W, h)
     s = head(W, h) + fr
-    s += (f'<text x="28" y="{h / 2 + 5}" font-size="14" fill="{MUTED}"><tspan fill="{GREEN}">ani@github</tspan> ~ $ ls ./more-repos'
-          f'<tspan fill="{CYAN}">   (C++, C, Java, web)</tspan></text>'
-          f'<text x="{W - 28}" y="{h / 2 + 5}" font-size="13" fill="{GOLD}" text-anchor="end">click to expand</text>')
+    for i, (grp, items) in enumerate(MORE):
+        x = pad + (i % 2) * (colw + gap)
+        y = top1 if i < 2 else top2
+        g = f'<text x="{x}" y="{y}" font-size="12" fill="{MUTED}">{esc(grp)}</text>'
+        for j, (name, desc) in enumerate(items):
+            yy = y + 28 + j * rowh
+            g += (f'<text x="{x}" y="{yy}" font-size="13" font-weight="700" fill="{CYAN}">{esc(name)}</text>'
+                  f'<text x="{x + 204}" y="{yy}" font-size="12" fill="{SOFT}">{esc(desc)}</text>')
+        s += fade(g, 0.1 + i * 0.2)
+    s += fade(f'<text x="{W - pad}" y="{h - 22}" font-size="13" fill="{GOLD}" text-anchor="end">all repositories &#8594;</text>', 1.0)
     write(out("more-repos.svg"), s + "</svg>")
 
 

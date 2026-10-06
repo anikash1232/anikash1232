@@ -54,35 +54,12 @@
 </tr>
 </table>
 
-<details>
-<summary><img src="./art/more-repos.svg" width="860" alt="More repos: C++ graphics, C systems, Java design patterns, web. Click to expand." /></summary>
+<br>
+<br>
 
-<div align="left">
+<h3><code>ani@github ~ $ ls ./more-repos</code></h3>
 
-<br/>
-
-**Graphics (C++)**
-- [2d-rasterizer-blending](https://github.com/anikash1232/2d-rasterizer-blending): software rasterizer implementing the full Porter-Duff compositing model, all twelve blend modes over premultiplied pixels, with span blending templated on the mode so the dispatch switch folds away at compile time
-- [2d-rasterizer-shapes](https://github.com/anikash1232/2d-rasterizer-shapes): canvas primitives, line clipping and coverage-based anti-aliasing
-
-**Systems (C)**
-- [c-string-vector-library](https://github.com/anikash1232/c-string-vector-library): generic dynamic array and string types over `malloc`, with an allocation-guard layer
-- [c-line-sorter](https://github.com/anikash1232/c-line-sorter): lines of unknown length into growing heap buffers
-- [c-hex-and-parity-tools](https://github.com/anikash1232/c-hex-and-parity-tools): encoder/decoder pairs with bit-level parity checking
-
-**Object-oriented design (Java)**
-- [dungeon-crawler](https://github.com/anikash1232/dungeon-crawler): procedurally generated JavaFX dungeon crawler, ~1,200 lines, with polymorphic collision resolution
-- [adapter-pattern-library](https://github.com/anikash1232/adapter-pattern-library): UNC campus walking directions, adapting a routing service to a buildings API
-- [robot-control-simulator](https://github.com/anikash1232/robot-control-simulator): decorator-pattern robot customization with a composed JavaFX visual
-
-**Web**
-- [hydration-calculator](https://github.com/anikash1232/hydration-calculator): temperature-adjusted daily water intake (Next.js, shadcn/ui)
-- [pixel-art-maker](https://github.com/anikash1232/pixel-art-maker): canvas editor with drawing logic fully separated from the DOM
-- [url-shortener-orm](https://github.com/anikash1232/url-shortener-orm): FastAPI over an ORM, wired with dependency injection
-
-</div>
-
-</details>
+<a href="https://github.com/anikash1232?tab=repositories"><img src="./art/more-repos.svg" width="860" alt="More repos: C++ rasterizer, C systems tools, Java design patterns, web projects. Click for all repositories." /></a>
 
 <br>
 
