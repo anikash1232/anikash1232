@@ -10,17 +10,27 @@
 <br>
 <br>
 
-<!-- info card (left, edit scripts/make_info_card.py) + stats card (right, auto-refreshed).
-     both svgs are 840x880 so equal widths give equal heights. -->
+<!-- portrait (left) + info card (right). both svgs are 840x880 so equal widths give equal heights.
+     portrait: python scripts/prep_photo.py <photo.jpg> && python scripts/make_ascii_svg.py
+     info card: edit ROWS in scripts/make_info_card.py, then python scripts/make_info_card.py -->
 
 <h3><code>ani@github ~ $ whoami</code></h3>
 
 <table>
 <tr>
-<td valign="top"><img src="./info-card.svg" width="420" alt="Ani Kashyap, neofetch-style info card" /></td>
-<td valign="top"><img src="./stats.svg" width="420" alt="Ani's GitHub streak and contribution stats, auto-refreshed daily" /></td>
+<td valign="top"><img src="./ani-ascii.svg" width="420" alt="Anirudh Kashyap, ASCII portrait" /></td>
+<td valign="top"><img src="./info-card.svg" width="420" alt="Anirudh Kashyap, neofetch-style info card" /></td>
 </tr>
 </table>
+
+<br>
+<br>
+
+<!-- wide stats card, auto-refreshed daily by the same workflow -->
+
+<h3><code>ani@github ~ $ ./stats.sh</code></h3>
+
+<img src="./stats.svg" width="860" alt="Ani's GitHub streak and contribution stats, auto-refreshed daily" />
 
 <br>
 <br>

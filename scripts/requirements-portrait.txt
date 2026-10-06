@@ -1,0 +1,6 @@
+# local only, needed to rebuild the portrait when you change your photo
+pillow
+numpy
+opencv-python
+rembg[cpu]
+onnxruntime

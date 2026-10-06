@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """
 Render the streak / numbers card from data/contributions.json (written daily by
-fetch_contributions.py) as a terminal-window SVG that sits beside avi-ascii.svg.
+fetch_contributions.py) as a terminal-window SVG that sits below the portrait + info card.
 
-The canvas is the same size as the portrait (840 x 880) so the two panels line
-up when the README shows them side by side at equal widths. Fonts are sized for
-that half-width display (~0.5x).
+The canvas is 860 wide (same as the heatmap) and shown 1:1 under the portrait row.
 
 Six stat tiles slide in and their numbers count up to the real value, then a
 monthly-contributions bar chart grows in underneath. The count-up is a stack of
@@ -32,13 +30,13 @@ INK = "#e6edf3"
 GREEN = "#39d353"
 BAR = "#26a641"
 
-W, H = 840, 880                      # == avi-ascii.svg canvas
+W, H = 860, 470                      # wide card; 860 == heatmap width in the README
 PAD = 20
 TITLEBAR_H = 30
-COLS, ROWS = 2, 3
+COLS, ROWS = 3, 2
 GAP = 16
 TILE_W = (W - PAD * 2 - GAP * (COLS - 1)) / COLS
-TILE_H = 150
+TILE_H = 86
 TILES_TOP = TITLEBAR_H + PAD + 4
 CHART_TOP = TILES_TOP + ROWS * TILE_H + (ROWS - 1) * GAP + GAP
 
@@ -111,10 +109,10 @@ for i, (label, value, suffix, caption, accent) in enumerate(tiles):
     parts.append(f'<g class="t" style="animation-delay:{start:.2f}s">')
     parts.append(f'<rect x="{x:.1f}" y="{y}" width="{TILE_W:.1f}" height="{TILE_H}" rx="10" '
                  f'fill="{TILE}" stroke="{FRAME}"/>')
-    parts.append(f'<text x="{x+24:.1f}" y="{y+40}" fill="{MUTED}" font-size="22">$ {label}</text>')
+    parts.append(f'<text x="{x+16:.1f}" y="{y+24}" fill="{MUTED}" font-size="13">$ {label}</text>')
 
     # count-up frames: ease-out so it decelerates into the real number
-    num_y = y + 100
+    num_y = y + 58
     for k in range(1, FRAMES + 1):
         p = k / FRAMES
         v = value * (1 - (1 - p) ** 3)
@@ -124,11 +122,11 @@ for i, (label, value, suffix, caption, accent) in enumerate(tiles):
         if k < FRAMES:
             anim += f'<set attributeName="opacity" to="0" begin="{t_off:.3f}s"/>'
         parts.append(
-            f'<text x="{x+24:.1f}" y="{num_y}" opacity="0" font-size="54" font-weight="700" fill="{accent}">'
-            f'{fmt(v, value)}<tspan font-size="24" font-weight="400" fill="{MUTED}">{suffix}</tspan>'
+            f'<text x="{x+16:.1f}" y="{num_y}" opacity="0" font-size="30" font-weight="700" fill="{accent}">'
+            f'{fmt(v, value)}<tspan font-size="14" font-weight="400" fill="{MUTED}">{suffix}</tspan>'
             f'{anim}</text>'
         )
-    parts.append(f'<text x="{x+24:.1f}" y="{y+132}" fill="{MUTED}" font-size="20">{caption}</text>')
+    parts.append(f'<text x="{x+16:.1f}" y="{y+77}" fill="{MUTED}" font-size="12">{caption}</text>')
     parts.append('</g>')
 
 # ---- monthly bars --------------------------------------------------------
@@ -138,12 +136,12 @@ chart_h = H - PAD - CHART_TOP
 parts.append(f'<g class="t" style="animation-delay:{BAR_START - 0.3:.2f}s">')
 parts.append(f'<rect x="{chart_x}" y="{CHART_TOP}" width="{chart_w}" height="{chart_h}" rx="10" '
              f'fill="{TILE}" stroke="{FRAME}"/>')
-parts.append(f'<text x="{chart_x+24}" y="{CHART_TOP+40}" fill="{MUTED}" font-size="22">$ contributions / month</text>')
+parts.append(f'<text x="{chart_x+16}" y="{CHART_TOP+24}" fill="{MUTED}" font-size="13">$ contributions / month</text>')
 parts.append('</g>')
 
-plot_top = CHART_TOP + 64
-plot_bot = CHART_TOP + chart_h - 40
-plot_l, plot_r = chart_x + 24, chart_x + chart_w - 24
+plot_top = CHART_TOP + 48
+plot_bot = CHART_TOP + chart_h - 26
+plot_l, plot_r = chart_x + 16, chart_x + chart_w - 16
 slot = (plot_r - plot_l) / len(monthly)
 bar_w = slot * 0.62
 peak = max(m["total"] for m in monthly) or 1
@@ -155,11 +153,11 @@ for i, m in enumerate(monthly):
     parts.append(f'<rect class="b" x="{bx:.1f}" y="{plot_bot - h:.1f}" width="{bar_w:.1f}" height="{h:.1f}" '
                  f'rx="3" fill="{fill}" style="animation-delay:{delay:.2f}s"/>')
     mon = datetime.date.fromisoformat(m["month"] + "-01").strftime("%b")[0]
-    parts.append(f'<text x="{bx + bar_w/2:.1f}" y="{plot_bot + 28}" fill="{MUTED}" font-size="18" '
+    parts.append(f'<text x="{bx + bar_w/2:.1f}" y="{plot_bot + 17}" fill="{MUTED}" font-size="11" '
                  f'text-anchor="middle">{mon}</text>')
     if m["total"] == peak:
         parts.append(f'<text class="t" style="animation-delay:{delay + BAR_DUR:.2f}s" x="{bx + bar_w/2:.1f}" '
-                     f'y="{plot_bot - h - 10:.1f}" fill="{INK}" font-size="18" text-anchor="middle">{peak:,}</text>')
+                     f'y="{plot_bot - h - 6:.1f}" fill="{INK}" font-size="11" text-anchor="middle">{peak:,}</text>')
 
 parts.append('</svg>')
 svg = "".join(parts)
