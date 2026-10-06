@@ -31,8 +31,13 @@ try:
     repos = [r for r in repos if not r["fork"] and not r["private"]][:REPOS]
     found = []
     for r in repos:
-        for c in get(f"https://api.github.com/repos/{USER}/{r['name']}/commits",
-                     params={"author": USER, "per_page": 6}):
+        try:
+            commits = get(f"https://api.github.com/repos/{USER}/{r['name']}/commits",
+                          params={"author": USER, "per_page": 6})
+        except Exception as e:  # empty repos return 409; skip them instead of aborting
+            print(f"  skip {r['name']}: {e}", file=sys.stderr)
+            continue
+        for c in commits:
             msg = c["commit"]["message"].splitlines()[0].strip()
             if "[skip ci]" in msg or msg.lower().startswith("merge"):
                 continue

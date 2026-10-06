@@ -40,7 +40,12 @@ try:
     for r in repos:
         if r["fork"] or r["private"]:
             continue
-        for lang, n in get(r["languages_url"]).items():
+        try:
+            langs = get(r["languages_url"])
+        except Exception as e:
+            print(f"  skip {r['name']}: {e}", file=sys.stderr)
+            continue
+        for lang, n in langs.items():
             if lang not in SKIP:
                 totals[lang] = totals.get(lang, 0) + n
     if not totals:

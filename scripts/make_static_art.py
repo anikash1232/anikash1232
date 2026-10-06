@@ -243,5 +243,15 @@ def contact():
     write(out("contact.svg"), s + "</svg>")
 
 
+def more_repos():
+    h = 56
+    fr, _ = frame(W, h)
+    s = head(W, h) + fr
+    s += (f'<text x="28" y="{h / 2 + 5}" font-size="14" fill="{MUTED}"><tspan fill="{GREEN}">ani@github</tspan> ~ $ ls ./more-repos'
+          f'<tspan fill="{CYAN}">   (C++, C, Java, web)</tspan></text>'
+          f'<text x="{W - 28}" y="{h / 2 + 5}" font-size="13" fill="{GOLD}" text-anchor="end">click to expand</text>')
+    write(out("more-repos.svg"), s + "</svg>")
+
+
 if __name__ == "__main__":
-    banner(); impact(); tech(); career(); project_cards(); buttons(); contact()
+    more_repos(); banner(); impact(); tech(); career(); project_cards(); buttons(); contact()

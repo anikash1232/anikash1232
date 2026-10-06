@@ -55,7 +55,9 @@
 </table>
 
 <details>
-<summary><b>🔧 Selected engineering work</b></summary>
+<summary><img src="./art/more-repos.svg" width="860" alt="More repos: C++ graphics, C systems, Java design patterns, web. Click to expand." /></summary>
+
+<div align="left">
 
 <br/>
 
@@ -77,6 +79,8 @@
 - [hydration-calculator](https://github.com/anikash1232/hydration-calculator): temperature-adjusted daily water intake (Next.js, shadcn/ui)
 - [pixel-art-maker](https://github.com/anikash1232/pixel-art-maker): canvas editor with drawing logic fully separated from the DOM
 - [url-shortener-orm](https://github.com/anikash1232/url-shortener-orm): FastAPI over an ORM, wired with dependency injection
+
+</div>
 
 </details>
 
