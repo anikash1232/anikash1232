@@ -1,6 +1,7 @@
 name: Update profile art
 
-# Refreshes the contribution heatmap + stats card SVGs daily from real data.
+# Refreshes everything on the profile that is driven by live data:
+# contribution heatmap, stats card, top-languages bar (info card), git log panel.
 # Runs daily, on push to main, and on demand.
 
 "on":
@@ -14,7 +15,7 @@ permissions:
   contents: write
 
 jobs:
-  heatmap:
+  refresh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,8 +36,20 @@ jobs:
       - name: Render streak / numbers card
         run: python scripts/render_stats_svg.py
 
+      - name: Fetch top languages + latest commits (public repos)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/fetch_languages.py
+          python scripts/fetch_commits.py
+
+      - name: Render "Now" card + git log panel
+        run: |
+          python scripts/make_info_card.py
+          python scripts/make_commits_svg.py
+
       - name: Commit updated art
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore: refresh contribution graph [skip ci]"
-          file_pattern: "data/contributions.json contrib-heatmap.svg stats.svg"
+          commit_message: "chore: refresh profile art [skip ci]"
+          file_pattern: "data/*.json contrib-heatmap.svg stats.svg info-card.svg art/commits.svg"

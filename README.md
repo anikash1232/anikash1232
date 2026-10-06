@@ -1,188 +1,58 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=180&section=header&text=Anirudh%20Kashyap&fontSize=42&fontColor=fff&animation=twinkling&fontAlignY=36&desc=AI%20Automation%20%7C%20Full-Stack%20%7C%20Applied%20AI&descSize=16&descAlignY=58&descColor=ccd6f6" width="100%"/>
+<img src="./art/banner.svg" width="860" alt="Anirudh Kashyap. Computer Science at UNC Chapel Hill, co-founder at Prysma Tech, applied AI researcher." />
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=500&size=22&pause=1000&color=58A6FF&center=true&vCenter=true&width=700&lines=CS+%40+UNC+Chapel+Hill;Co-founder+%40+Prysma+Tech;Applied+AI+Researcher+%7C+Accessibility;%F0%9F%8F%86+1st+Place+%7C+FidHacks+2025;Open+to+SWE+Internships+%7C+Summer+2027)](https://git.io/typing-svg)
+<br>
 
-<br/>
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/anikash1)
-[![GitHub](https://img.shields.io/badge/GitHub-171515?style=for-the-badge&logo=github&logoColor=white)](https://github.com/anikash1232)
-[![Email](https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:anirudh.vpk@gmail.com)
-[![UNC](https://img.shields.io/badge/UNC%20Chapel%20Hill-4B9CD3?style=for-the-badge&logoColor=white)](https://cs.unc.edu)
-
-<br/>
-
-<!-- animated contribution graph: real data, boxes reveal cell by cell
-     (regenerated daily by .github/workflows/update-profile-art.yml) -->
-
-<h3><code>ani@github ~ $ ./contributions.sh</code></h3>
-
-<img src="./contrib-heatmap.svg" width="860" alt="Ani's GitHub contribution graph, auto-refreshed daily" />
+<a href="https://linkedin.com/in/anikash1"><img src="./art/btn-linkedin.svg" height="44" alt="LinkedIn" /></a>
+<a href="https://github.com/anikash1232"><img src="./art/btn-github.svg" height="44" alt="GitHub" /></a>
+<a href="mailto:anirudh.vpk@gmail.com"><img src="./art/btn-email.svg" height="44" alt="Email" /></a>
+<a href="https://cs.unc.edu"><img src="./art/btn-unc.svg" height="44" alt="UNC CS" /></a>
 
 <br>
 <br>
 
-<!-- portrait (left) + info card (right). both svgs are 840x880 so equal widths give equal heights.
+<!-- portrait (left) + "Now" card (right). both svgs are 840x880 so equal widths give equal heights.
      portrait: python scripts/prep_photo.py <photo.jpg> && python scripts/make_ascii_svg.py
-     info card: edit ROWS in scripts/make_info_card.py, then python scripts/make_info_card.py -->
+     card: edit ROWS / ASKS in scripts/make_info_card.py (top-languages bar refreshes daily) -->
 
-<h3><code>ani@github ~ $ whoami</code></h3>
+<h3><code>ani@github ~ $ ./about.sh</code></h3>
 
 <table>
 <tr>
 <td valign="top"><img src="./ani-ascii.svg" width="420" alt="Anirudh Kashyap, ASCII portrait" /></td>
-<td valign="top"><img src="./info-card.svg" width="420" alt="Anirudh Kashyap, neofetch-style info card" /></td>
+<td valign="top"><img src="./info-card.svg" width="420" alt="What Anirudh is building and teaching now, his top languages and what to ask him about" /></td>
 </tr>
 </table>
 
 <br>
+
+<h3><code>ani@github ~ $ ./impact.sh</code></h3>
+
+<img src="./art/impact.svg" width="860" alt="Impact: 200+ hours a month saved, 2,500+ accessibility tool users, 100+ App Store users, 1st place at FidHacks 2025" />
+
+<br>
 <br>
 
-<!-- wide stats card, auto-refreshed daily by the same workflow -->
+<h3><code>ani@github ~ $ ./stack.sh</code></h3>
 
-<h3><code>ani@github ~ $ ./stats.sh</code></h3>
+<img src="./art/tech.svg" width="860" alt="Tech stack. Daily drivers: Python, TypeScript, React, FastAPI, AWS, PostgreSQL. Also Java, C++, JavaScript, SQL, Next.js, Angular, Node.js, Claude and OpenAI APIs, MCP, RAG, Azure, Docker, Git, Linux." />
 
-<img src="./stats.svg" width="860" alt="Ani's GitHub streak and contribution stats, auto-refreshed daily" />
+<br>
+<br>
 
-</div>
+<h3><code>ani@github ~ $ ls ./projects</code></h3>
 
----
-
-## 👋 About Me
-
-```python
-ani = {
-    "🎓 school":     "UNC Chapel Hill | B.S. Computer Science",
-    "📅 graduating": "May 2028",
-    "🔭 focus":      ["Automation & Applied AI", "Full-Stack Development", "Accessibility"],
-    "💼 currently":  [
-        "Co-founder & Software Engineer  →  Prysma Tech",
-        "Applied AI Researcher           →  UNC Computer Science",
-        "Teaching Assistant              →  COMP 210 Data Structures & Analysis",
-    ],
-    "🏆 achievement": "1st place overall | FidHacks 2025 (25+ teams)",
-    "📬 reach me":    "anirudh.vpk@gmail.com",
-}
-```
-
-**What I'm working on**
-
-- **Prysma Tech**: an AI automation consultancy, grown to four engineers. We build lead-sourcing pipelines and microservice CRM systems for investment banking clients: concurrent scraping, enrichment and outreach that replaced 200+ hours of manual sourcing a month.
-- **UNC Computer Science**: building an in-house accessibility tool with React, TypeScript, FastAPI and the OpenAI API that replaced a proprietary Adobe service, automating WCAG and PDF-UA alt-text generation for PDFs and slide decks through an AWS S3 and PostgreSQL pipeline.
-
----
-
-## 🏆 Highlights
-
-<div align="center">
-
-| 🥇 Achievement | 🏛️ Where | 📅 When |
-|:---|:---|:---|
-| **1st Place overall** | FidHacks (25+ teams) | 2025 |
-| **Selected for production** over 40+ cohort projects | LearnWithAI | 2026 |
-| **Co-founded Prysma Tech**, grown to 4 engineers | Prysma Tech | 2026 |
-
-</div>
-
----
-
-## 🛠️ Tech Stack
-
-<div align="center">
-
-**Languages**
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![C](https://img.shields.io/badge/C-00599C?style=flat-square&logo=c&logoColor=white)
-![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white)
-![C%23](https://img.shields.io/badge/C%23-239120?style=flat-square&logo=c-sharp&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white)
-![R](https://img.shields.io/badge/R-276DC3?style=flat-square&logo=r&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
-![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white)
-
-**Frontend & Backend**
-
-![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=flat-square&logo=angular&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
-
-**AI & Data**
-
-![Claude API](https://img.shields.io/badge/Claude%20API-D97757?style=flat-square&logo=anthropic&logoColor=white)
-![OpenAI API](https://img.shields.io/badge/OpenAI%20API-412991?style=flat-square&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
-
-**Databases & Cloud**
-
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonwebservices&logoColor=white)
-![Azure](https://img.shields.io/badge/Azure-0078D4?style=flat-square&logo=microsoftazure&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
-
-**Tools**
-
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
-![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat-square&logo=playwright&logoColor=white)
-![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=flat-square&logo=selenium&logoColor=white)
-
-</div>
-
----
-
-## 🚀 Featured Projects
-
-### 📅 [UNCWorkflows](https://uncworkflows.vercel.app/) &nbsp;·&nbsp; `Course administration tooling`
-
-> Unifies GitHub Classroom, Gradescope, Canvas, Google Sheets and Govaluate into one master roster: five systems that identify students differently, reconciled into one authoritative view.
-
-`Next.js` `TypeScript` `Claude API`
-
-- Priority-based seating chart generator for exams
-- Automated Java-to-Govaluate test conversion, saving course staff 10+ hours per semester
-
----
-
-### 🗓️ [Syllabus-to-Calendar Engine](https://calendargen.up.railway.app/) &nbsp;·&nbsp; `Built for LearnWithAI · selected for production over 40+ cohort projects`
-
-> Upload a syllabus, get a structured course calendar with `.ics` export.
-
-`Python` `FastAPI` `Dramatiq` `Angular` `Claude API`
-
-- LLM extraction runs on a Dramatiq queue so long documents don't time out the request
-- Instructor review step before anything is committed
-
----
-
-### 🏆 [Landed](https://landed-pi.vercel.app/) &nbsp;·&nbsp; `1st Place · FidHacks 2025 (25+ teams)` &nbsp;[`repo`](https://github.com/anikash1232/landed)
-
-> Financial guidance for international students building US credit from zero history. A seven-question profile drives streamed, personalized roadmaps and card recommendations.
-
-`React` `TypeScript` `FastAPI` `Claude API`
-
----
-
-### 📍 [pipeline-automation](https://github.com/anikash1232/pipeline-automation)
-
-> Automated Google Maps lead generation across US metro areas. Pick an industry and a set of metros in a web form; the system scrapes unattended and emails back a Google Sheet with summary stats.
-
-`React` `Vercel` `Python` `Railway` `Apify`
-
----
+<table>
+<tr>
+<td><a href="https://uncworkflows.vercel.app/"><img src="./art/project-1.svg" width="424" alt="UNCWorkflows, used by 60+ CS professors" /></a></td>
+<td><a href="https://calendargen.up.railway.app/"><img src="./art/project-2.svg" width="424" alt="Syllabus-to-Calendar Engine, selected for production over 40+ projects" /></a></td>
+</tr>
+<tr>
+<td><a href="https://landed-pi.vercel.app/"><img src="./art/project-3.svg" width="424" alt="Landed, 1st place at FidHacks 2025" /></a></td>
+<td><a href="https://github.com/anikash1232/pipeline-automation"><img src="./art/project-4.svg" width="424" alt="pipeline-automation, unattended lead generation" /></a></td>
+</tr>
+</table>
 
 <details>
 <summary><b>🔧 Selected engineering work</b></summary>
@@ -210,36 +80,42 @@ ani = {
 
 </details>
 
----
+<br>
 
-## 💼 Experience
+<h3><code>ani@github ~ $ git log --career</code></h3>
 
-<div align="center">
+<img src="./art/career.svg" width="860" alt="Career: Co-Founder at Prysma Tech, Applied AI Researcher at UNC, Software Developer at Chiaro, Software Engineer Intern at Integrus, Teaching Assistant for COMP 210 and COMP 301" />
 
-| 💼 Role | 🏢 Company | 📅 Duration |
-|:---|:---|:---|
-| Co-Founder & Software Engineer | **Prysma Tech** | May 2026 – Present |
-| Applied AI Researcher | **UNC Computer Science** | Jan 2026 – Present |
-| Teaching Assistant (COMP 210, COMP 301) | **UNC Dept. of Computer Science** | Spring 2026 – Present |
-| Software Developer | **Chiaro** | Apr 2026 – Jun 2026 |
-| Software Engineer Intern | **Integrus** (Investment Bank) | Jan 2026 – May 2026 |
+<br>
+<br>
 
-</div>
+<!-- latest public commits, rebuilt daily by .github/workflows/update-profile-art.yml -->
 
----
+<h3><code>ani@github ~ $ git log --oneline -5</code></h3>
 
-<div align="center">
+<img src="./art/commits.svg" width="860" alt="Latest public commits, auto-refreshed daily" />
 
-### 📫 Let's build something together
+<br>
+<br>
 
-*Open to SWE internships, Summer 2027*
+<!-- animated contribution graph + stats: real data, rebuilt daily by the same workflow -->
 
-[![Email](https://img.shields.io/badge/anirudh.vpk%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:anirudh.vpk@gmail.com)
-&nbsp;
-[![LinkedIn](https://img.shields.io/badge/anikash1-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/anikash1)
+<h3><code>ani@github ~ $ ./contributions.sh</code></h3>
 
-<br/>
+<img src="./contrib-heatmap.svg" width="860" alt="Ani's GitHub contribution graph, auto-refreshed daily" />
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer" width="100%"/>
+<br>
+
+<img src="./stats.svg" width="860" alt="Ani's GitHub streak and contribution stats, auto-refreshed daily" />
+
+<br>
+<br>
+
+<img src="./art/contact.svg" width="860" alt="Let's build something together. Open to software engineering roles." />
+
+<br>
+
+<a href="mailto:anirudh.vpk@gmail.com"><img src="./art/btn-contact-email.svg" height="44" alt="Email anirudh.vpk@gmail.com" /></a>
+<a href="https://linkedin.com/in/anikash1"><img src="./art/btn-contact-linkedin.svg" height="44" alt="LinkedIn linkedin.com/in/anikash1" /></a>
 
 </div>

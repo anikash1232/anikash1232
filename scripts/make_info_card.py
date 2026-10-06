@@ -1,122 +1,134 @@
 #!/usr/bin/env python3
 """
-Hand-authored neofetch-style info card (terminal window SVG). Rows fade and
-slide in one after another, then freeze. Edit the ROWS list below, then:
+The "Now" card: what Ani is doing right now, a live top-languages bar, and
+a few things to ask him about. Rows fade in one after another, then freeze.
 
-    python scripts/make_info_card.py            # writes info-card.svg
-    STATIC=1 python scripts/make_info_card.py   # frozen frame for previews
+    python scripts/make_info_card.py              # writes info-card.svg
+    LANG_SAMPLE=1 python scripts/make_info_card.py  # preview with sample language data
 
-Canvas is 840 x 880 so it lines up with stats.svg when both are shown at equal
-widths in the README table.
+Canvas is 840 x 880 so it matches ani-ascii.svg at equal widths in the README table.
+Language data comes from data/languages.json (refreshed daily by the Action).
 """
-import html
+import json
 import os
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "info-card.svg")
-STATIC = bool(os.environ.get("STATIC"))
+from theme import (BG, CW, CYAN, FRAME, GOLD, GREEN, INK, MUTED, SOFT,
+                   esc, fade, frame, head, text_w, write)
 
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 W, H = 840, 880
-PAD = 28
-TITLEBAR_H = 30
-
-BG, BG2 = "#0d1117", "#111722"
-FRAME = "#30363d"
-MUTED = "#7d8590"
-INK = "#e6edf3"
-KEY = "#22d3ee"
-GREEN = "#39d353"
-GOLD = "#f2cc60"
-
-USER = "ani"
-HOST = "github"
-
-# (key, value). value can be a list of lines. EDIT THESE.
-ROWS = [
-    ("Name", "Anirudh Kashyap"),
-    ("School", "UNC Chapel Hill, BS Computer Science '28"),
-    ("Now", ["Co-founder, Prysma Tech (AI + CRM)",
-             "Contract SWE, Integrus",
-             "Senior TA, COMP 210 (Data Structures)"]),
-    ("Research", "ADA Accessibility Tool, Prof. Goodwin"),
-    ("Stack", ["Python, TypeScript, React, SQL",
-               "AWS, GitHub Actions, automation"]),
-    ("Certs", ["AWS Cloud Practitioner", "DealCloud Platform Manager"]),
-    ("Looking", "SWE internships, Summer 2027"),
-    ("Where", "Chapel Hill, NC"),
-]
-
-KEY_COL_W = 190
-FS = 22           # font size for rows
+PAD = 32
+FS = 28
 LINE_H = 40
-STAGGER = 0.22
+KEY_W = 210
 
-parts = [
-    f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
-    f'font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">',
-    '<style>'
-    '.l{opacity:0;animation:in .5s ease-out both}'
-    '@keyframes in{0%{opacity:0;transform:translateX(-10px)}100%{opacity:1;transform:translateX(0)}}'
-    '@media (prefers-reduced-motion: reduce){.l{opacity:1!important;transform:none!important;animation:none!important}}'
-    '</style>',
-    f'<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">'
-    f'<stop offset="0" stop-color="{BG2}"/><stop offset="1" stop-color="{BG}"/></linearGradient></defs>',
-    f'<rect width="{W}" height="{H}" rx="12" fill="url(#bg)"/>',
-    f'<rect x="0.5" y="0.5" width="{W-1}" height="{H-1}" rx="12" fill="none" stroke="{FRAME}"/>',
-    f'<line x1="0" y1="{TITLEBAR_H}" x2="{W}" y2="{TITLEBAR_H}" stroke="{FRAME}"/>',
+# EDIT THESE ---------------------------------------------------------------
+ROWS = [
+    ("Building", ["Lead-sourcing + CRM systems",
+                  "WCAG + PDF/UA accessibility tool",
+                  "Course admin tooling"]),
+    ("Teaching", ["COMP 210 + COMP 301 (TA)"]),
+    ("Certs", ["AWS Cloud Practitioner", "DealCloud Platform Manager"]),
+    ("Where", ["Chapel Hill, NC"]),
 ]
-for i, dot in enumerate(["#ff5f56", "#ffbd2e", "#27c93f"]):
-    parts.append(f'<circle cx="{PAD - 8 + i*16}" cy="{TITLEBAR_H/2}" r="5" fill="{dot}"/>')
-parts.append(f'<text x="{W/2}" y="{TITLEBAR_H/2 + 4}" fill="{MUTED}" font-size="12" '
-             f'text-anchor="middle">{USER}@{HOST}: ~$ neofetch</text>')
+ASKS = [
+    "turning messy documents into structured data",
+    "WCAG + PDF/UA accessibility at scale",
+    "winning FidHacks 2025 with Landed",
+]
+# --------------------------------------------------------------------------
 
-n = 0
-
-
-def line(y, inner):
-    global n
-    cls = "" if STATIC else ' class="l"'
-    style = "" if STATIC else f' style="animation-delay:{n * STAGGER:.2f}s"'
-    n += 1
-    parts.append(f'<g{cls}{style}>{inner}</g>')
+LANG_COLORS = {"Python": "#3572A5", "TypeScript": "#3178c6", "JavaScript": "#f1e05a",
+               "Java": "#f89820", "C++": "#f34b7d", "C": "#a8b9cc", "Go": "#00ADD8",
+               "C#": "#68c46b", "Shell": "#89e051", "R": "#2a7fd4", "Other": "#7d8590"}
+FALLBACK = ["#bc8cff", "#ff9d5c", "#4ade80", "#f472b6"]
 
 
-y = TITLEBAR_H + 70
-line(y, f'<text x="{PAD}" y="{y}" font-size="{FS + 6}" font-weight="700">'
-        f'<tspan fill="{GREEN}">{USER}</tspan><tspan fill="{MUTED}">@</tspan>'
-        f'<tspan fill="{GREEN}">{HOST}</tspan></text>')
-y += 22
-line(y, f'<text x="{PAD}" y="{y}" font-size="{FS}" fill="{MUTED}">{"-" * 24}</text>')
-y += LINE_H + 8
+def load_langs():
+    if os.environ.get("LANG_SAMPLE"):
+        return [{"n": "Python", "pct": 38}, {"n": "TypeScript", "pct": 30}, {"n": "Java", "pct": 14},
+                {"n": "C++", "pct": 10}, {"n": "Other", "pct": 8}]
+    try:
+        return json.load(open(os.path.join(ROOT, "data", "languages.json")))["langs"]
+    except (OSError, ValueError, KeyError):
+        return []
 
-for key, val in ROWS:
-    vals = val if isinstance(val, list) else [val]
+
+langs = load_langs()
+fr, top = frame(W, H, "ani@github: ~$ ./now.sh")
+parts = [head(W, H), fr]
+k = 0
+
+
+def add(inner):
+    global k
+    parts.append(fade(inner, 0.1 + k * 0.2))
+    k += 1
+
+
+y = top + 56
+add(f'<text x="{PAD}" y="{y}" font-size="{FS + 6}" font-weight="700">'
+    f'<tspan fill="{GREEN}">ani</tspan><tspan fill="{MUTED}">@</tspan><tspan fill="{GREEN}">now</tspan></text>')
+y += 28
+add(f'<text x="{PAD}" y="{y}" font-size="{FS}" fill="{FRAME}">{"-" * 24}</text>')
+y += LINE_H + 4
+
+for key, vals in ROWS:
     for i, v in enumerate(vals):
-        assert len(v) * FS * 0.6 < W - PAD * 2 - KEY_COL_W, f'row too long: {v}'
-        k = f'<tspan fill="{KEY}" font-weight="700">{html.escape(key)}</tspan>' if i == 0 else ""
-        inner = (f'<text x="{PAD}" y="{y}" font-size="{FS}">{k}</text>'
-                 f'<text x="{PAD + KEY_COL_W}" y="{y}" font-size="{FS}" fill="{INK}">{html.escape(v)}</text>')
-        line(y, inner)
+        assert text_w(v, FS) < W - PAD * 2 - KEY_W, f"row too long: {v}"
+        kk = f'<text x="{PAD}" y="{y}" font-size="{FS}" font-weight="700" fill="{CYAN}">{esc(key)}</text>' if i == 0 else ""
+        add(f'{kk}<text x="{PAD + KEY_W}" y="{y}" font-size="{FS}" fill="{INK}">{esc(v)}</text>')
         y += LINE_H
-    y += 10
+    y += 8
 
-# colour swatches, like neofetch
-y += 10
-sw = ["#ff5f56", "#ffbd2e", "#27c93f", "#22d3ee", "#1f6feb", "#bc8cff", "#e6edf3", "#7d8590"]
-rects = "".join(f'<rect x="{PAD + i*46}" y="{y - 24}" width="40" height="28" rx="4" fill="{c}"/>'
-                for i, c in enumerate(sw))
-line(y, rects)
+# live languages bar
+y += 14
+add(f'<text x="{PAD}" y="{y}" font-size="{FS}" font-weight="700" fill="{CYAN}">Top langs</text>'
+    f'<text x="{PAD + KEY_W}" y="{y}" font-size="20" fill="{MUTED}">public repos, daily</text>')
+y += 22
+bar_w, bar_h, gap = W - PAD * 2, 22, 4
+if langs:
+    avail = bar_w - gap * (len(langs) - 1)
+    x = PAD
+    seg = ""
+    for i, l in enumerate(langs):
+        w = max(8, avail * l["pct"] / 100)
+        c = LANG_COLORS.get(l["n"], FALLBACK[i % len(FALLBACK)])
+        l["c"] = c
+        seg += (f'<rect x="{x:.1f}" y="{y}" width="0" height="{bar_h}" rx="5" fill="{c}">'
+                f'<animate attributeName="width" from="0" to="{w:.1f}" dur=".7s" begin="{0.1 + k * 0.2 + i * 0.12:.2f}s" fill="freeze"/></rect>')
+        x += w + gap
+    parts.append(seg)
+else:
+    parts.append(f'<rect x="{PAD}" y="{y}" width="{bar_w}" height="{bar_h}" rx="5" fill="{FRAME}" opacity=".5"/>')
+k += 1
+y += bar_h + 34
+if langs:
+    x = PAD
+    leg = ""
+    for l in langs:
+        label = f'{l["n"]} {l["pct"]}%'
+        w = 20 + text_w(label, 20) + 20
+        if x + w > W - PAD:
+            x, y = PAD, y + 34
+        leg += (f'<circle cx="{x + 7}" cy="{y - 7}" r="7" fill="{l["c"]}"/>'
+                f'<text x="{x + 22}" y="{y}" font-size="20" fill="{SOFT}">{esc(label)}</text>')
+        x += w
+    add(leg)
+else:
+    add(f'<text x="{PAD}" y="{y}" font-size="22" fill="{MUTED}">refreshing on the next daily run</text>')
+y += 40
 
-# blinking prompt at the bottom
-py = H - 36
-parts.append(f'<text x="{PAD}" y="{py}" font-size="{FS - 4}" fill="{MUTED}">{USER}@{HOST}:~$ </text>')
-parts.append(f'<rect x="{PAD + 14 * (FS - 4) * 0.6:.1f}" y="{py - 18}" width="12" height="22" fill="{INK}">'
-             f'<animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" dur="1s" '
-             f'repeatCount="indefinite"/></rect>')
+# ask me about
+parts.append(fade(f'<line x1="{PAD}" y1="{y}" x2="{W - PAD}" y2="{y}" stroke="{FRAME}" stroke-dasharray="6 6"/>', 0.1 + k * 0.2))
+y += 46
+add(f'<text x="{PAD}" y="{y}" font-size="{FS}" font-weight="700" fill="{CYAN}">Ask me about</text>')
+y += 42
+for a in ASKS:
+    assert text_w(a, 25) < W - PAD * 2 - 36, f"ask too long: {a}"
+    add(f'<text x="{PAD}" y="{y}" font-size="25" fill="{GOLD}">?</text>'
+        f'<text x="{PAD + 36}" y="{y}" font-size="25" fill="{INK}">{esc(a)}</text>')
+    y += 38
 
-parts.append("</svg>")
-svg = "".join(parts)
-assert y < H - 60, f"content overflows card (y={y}); trim ROWS"
-with open(OUT, "w") as f:
-    f.write(svg)
-print(f"wrote {OUT}: {W} x {H}, {len(svg)//1024} KB")
+assert y < H - 20, f"content overflows card (y={y})"
+write(os.path.join(ROOT, "info-card.svg"), "".join(parts) + "</svg>")
